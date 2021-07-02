@@ -1,0 +1,152 @@
+{
+  "version": 1,
+  "projects": {
+    "lms": {
+      "projectType": "application",
+      "root": "apps/lms",
+      "sourceRoot": "apps/lms/src",
+      "prefix": "bangmaple",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/lms",
+            "index": "apps/lms/src/index.html",
+            "main": "apps/lms/src/main.ts",
+            "polyfills": "apps/lms/src/polyfills.ts",
+            "tsConfig": "apps/lms/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": ["apps/lms/src/favicon.ico", "apps/lms/src/assets"],
+            "styles": ["apps/lms/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/lms/src/environments/environment.ts",
+                  "with": "apps/lms/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "lms:build:production"
+            },
+            "development": {
+              "browserTarget": "lms:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "lms:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/lms/src/**/*.ts",
+              "apps/lms/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/lms"],
+          "options": {
+            "jestConfig": "apps/lms/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "lms-e2e": {
+      "root": "apps/lms-e2e",
+      "sourceRoot": "apps/lms-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/lms-e2e/cypress.json",
+            "tsConfig": "apps/lms-e2e/tsconfig.e2e.json",
+            "devServerTarget": "lms:serve:development"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "lms:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/lms-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  },
+  "schematics": {
+    "@nrwl/angular": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      },
+      "storybook-configuration": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/angular:application": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest"
+    },
+    "@nrwl/angular:component": {
+      "style": "scss"
+    }
+  },
+  "defaultProject": "lms"
+}
