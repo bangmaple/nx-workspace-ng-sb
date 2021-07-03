@@ -46,9 +46,17 @@
     },
     "test": {
       "tags": []
+    },
+    "lms-authentication": {
+      "tags": []
+    },
+    "lms-gateway": {
+      "tags": []
     }
   },
   "plugins": [
+    "@nxrocks/nx-spring-boot",
+    "@nxrocks/nx-spring-boot",
     "@nxrocks/nx-spring-boot"
   ]
 }

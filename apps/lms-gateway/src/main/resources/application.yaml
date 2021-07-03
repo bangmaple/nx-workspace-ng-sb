@@ -1,0 +1,53 @@
+server:
+  port: 5000
+
+spring:
+  application:
+    name: lms-gateway
+  cloud:
+    loadbalancer:
+      ribbon:
+        # Not needed since we excluded the dependency
+        enabled: false
+    # config consul discovery service
+    consul:
+      host: localhost
+      port: 8500
+      enabled: true
+      discovery:
+        instance-id: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
+        preferIpAddress: true
+        health-check-critical-timeout: 60s
+        # Get only services that are passing the health check
+        query-passing: true
+    gateway:
+      routes:
+        - id: lms-authentication
+          uri: lb://lms-authentication/
+          predicates:
+            - Path=/api/auth/**
+        - id: lms-users
+          uri: lb://lms-users/
+          predicates:
+            - Path=/api/users/**
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedHeaders:
+              - "*"
+            allowedMethods:
+              - "GET"
+              - "POST"
+              - "OPTIONS"
+              - "PATCH"
+              - "PUT"
+      default-filters:
+        - name: Retry
+          args:
+            retries: 5
+            methods: GET,POST,OPTIONS,PATCH,PUT
+# Uncomment the configuration below if you want to enable route matching logs
+#logging:
+#  level:
+#    org.springframework.cloud.gateway.handler.predicate: trace
