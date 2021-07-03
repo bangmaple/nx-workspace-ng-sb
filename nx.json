@@ -43,6 +43,12 @@
       "implicitDependencies": [
         "lms"
       ]
+    },
+    "test": {
+      "tags": []
     }
-  }
+  },
+  "plugins": [
+    "@nxrocks/nx-spring-boot"
+  ]
 }

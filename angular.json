@@ -9,7 +9,9 @@
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "outputPath": "dist/apps/lms",
             "index": "apps/lms/src/index.html",
@@ -17,7 +19,10 @@
             "polyfills": "apps/lms/src/polyfills.ts",
             "tsConfig": "apps/lms/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": ["apps/lms/src/favicon.ico", "apps/lms/src/assets"],
+            "assets": [
+              "apps/lms/src/favicon.ico",
+              "apps/lms/src/assets"
+            ],
             "styles": [
               "node_modules/primeng/resources/themes/vela-blue/theme.css",
               "node_modules/primeng/resources/primeng.min.css",
@@ -89,7 +94,9 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/lms"],
+          "outputs": [
+            "coverage/apps/lms"
+          ],
           "options": {
             "jestConfig": "apps/lms/jest.config.js",
             "passWithNoTests": true
@@ -118,7 +125,64 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/lms-e2e/**/*.{js,ts}"]
+            "lintFilePatterns": [
+              "apps/lms-e2e/**/*.{js,ts}"
+            ]
+          }
+        }
+      }
+    },
+    "test": {
+      "root": "apps/test",
+      "sourceRoot": "apps/test/src",
+      "projectType": "application",
+      "targets": {
+        "run": {
+          "executor": "@nxrocks/nx-spring-boot:run",
+          "options": {
+            "root": "apps/test"
+          }
+        },
+        "serve": {
+          "executor": "@nxrocks/nx-spring-boot:serve",
+          "options": {
+            "root": "apps/test"
+          }
+        },
+        "test": {
+          "executor": "@nxrocks/nx-spring-boot:test",
+          "options": {
+            "root": "apps/test"
+          }
+        },
+        "clean": {
+          "executor": "@nxrocks/nx-spring-boot:clean",
+          "options": {
+            "root": "apps/test"
+          }
+        },
+        "buildJar": {
+          "executor": "@nxrocks/nx-spring-boot:buildJar",
+          "options": {
+            "root": "apps/test"
+          }
+        },
+        "buildWar": {
+          "executor": "@nxrocks/nx-spring-boot:buildWar",
+          "options": {
+            "root": "apps/test"
+          }
+        },
+        "buildImage": {
+          "executor": "@nxrocks/nx-spring-boot:buildImage",
+          "options": {
+            "root": "apps/test"
+          }
+        },
+        "buildInfo": {
+          "executor": "@nxrocks/nx-spring-boot:buildInfo",
+          "options": {
+            "root": "apps/test"
           }
         }
       }
