@@ -3,8 +3,8 @@ package com.bangmaple.lms.authentication.services;
 import com.bangmaple.lms.authentication.models.AuthenticationRequestModel;
 import com.bangmaple.lms.authentication.models.AuthenticationResponseModel;
 import com.bangmaple.lms.authentication.models.RegistrationRequestModel;
-import com.bangmaple.lms.authentication.models.RegistrationResponseModel;
 import com.bangmaple.lms.authentication.repositories.UsersRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,10 +12,10 @@ import reactor.core.publisher.Mono;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class AuthenticationService {
 
-  @Autowired
-  private UsersRepository usersRepository;
+  private final UsersRepository usersRepository;
 
   public Mono<AuthenticationResponseModel> authenticate(Mono<AuthenticationRequestModel> authentication) {
       return authentication.flatMap(auth -> usersRepository
@@ -24,6 +24,7 @@ public class AuthenticationService {
   }
 
   public Mono<Void> register(Mono<RegistrationRequestModel> registrationRequest) {
-    return registrationRequest.flatMap(u -> usersRepository.register(u));
+    return registrationRequest.flatMap(u -> usersRepository.register(u.getUsername(), u.getPassword(),
+      u.getFullname(), u.getEmail()));
   }
 }

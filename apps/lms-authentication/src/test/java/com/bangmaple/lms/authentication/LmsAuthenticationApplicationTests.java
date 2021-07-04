@@ -15,8 +15,7 @@ class LmsAuthenticationApplicationTests {
 	@Test
 	void testSignUpUser() {
     RegistrationRequestModel registrationRequest = new RegistrationRequestModel();
-    registrationRequest.setUsername("123");
-	  this.usersRepository.register(registrationRequest);
+	 // this.usersRepository.register("admindd", "adddd", "a/ddd", "addd");
 	  this.usersRepository.findById(1L).subscribe(System.out::println);
 	}
 
