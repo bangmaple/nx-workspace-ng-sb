@@ -32,4 +32,10 @@ public class UsersEntity {
   @Column(UsersEntityConstant.IS_ACTIVATED)
   private boolean isActivated;
 
+  @Column(UsersEntityConstant.IS_LOCKED)
+  private boolean isLocked;
+
+  @Column(UsersEntityConstant.ROLE)
+  private String role;
+
 }

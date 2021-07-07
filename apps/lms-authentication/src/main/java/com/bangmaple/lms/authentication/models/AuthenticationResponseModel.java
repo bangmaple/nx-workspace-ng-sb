@@ -14,6 +14,8 @@ public class AuthenticationResponseModel {
   private String fullname;
   private String email;
   private boolean isActivated;
+  private boolean isLocked;
+  private String role;
 
   public AuthenticationResponseModel(UsersEntity user) {
     this.id = user.getId();
@@ -21,5 +23,7 @@ public class AuthenticationResponseModel {
     this.fullname = user.getFullname();
     this.email = user.getEmail();
     this.isActivated = user.isActivated();
+    this.isLocked = user.isLocked();
+    this.role = user.getRole();
   }
 }

@@ -8,4 +8,6 @@ public class UsersEntityConstant {
   public static final String FULLNAME = "fullname";
   public static final String EMAIL = "email";
   public static final String IS_ACTIVATED = "is_activated";
+  public static final String ROLE = "role";
+  public static final String IS_LOCKED = "is_locked";
 }

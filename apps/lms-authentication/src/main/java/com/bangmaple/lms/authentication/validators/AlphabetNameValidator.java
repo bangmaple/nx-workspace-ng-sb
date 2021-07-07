@@ -7,11 +7,12 @@ import reactor.core.scheduler.Schedulers;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
+import java.util.Objects;
 
 public class AlphabetNameValidator implements ConstraintValidator<AlphabetName, String> {
 
   @Override
   public boolean isValid(String value, ConstraintValidatorContext context) {
-    return value.matches("^[a-zA-Z]*$");
+    return !Objects.isNull(value) && value.matches("^[a-zA-Z]*$");
   }
 }

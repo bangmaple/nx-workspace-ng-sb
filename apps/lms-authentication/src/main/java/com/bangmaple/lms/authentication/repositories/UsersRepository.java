@@ -10,11 +10,11 @@ import reactor.core.publisher.Mono;
 public interface UsersRepository extends R2dbcRepository<UsersEntity, Long> {
 
   @Query(UsersRepositoryQuery.SIGN_IN)
-  Mono<UsersEntity> checkAuthentication(String username, String password);
+  Mono<UsersEntity> checkAuthentication(String username);
 
   @Query(UsersRepositoryQuery.SIGN_UP)
-  Mono<Void> register(@Param("username") String username, @Param("password") String password, @Param("fullname") String fullname,
-                      @Param("email") String email);
+  Mono<Void> register(@Param("username") String username, @Param("password") String password,
+                      @Param("fullname") String fullname, @Param("email") String email);
 
   Mono<Boolean> existsByUsername(String username);
 
